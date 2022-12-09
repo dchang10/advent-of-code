@@ -1,3 +1,11 @@
+
+
+
+
+
+########################
+# Part 2
+########################
 inputlist = Vector{String}(spit(input,"\n"))
   
 alpha = collect("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
