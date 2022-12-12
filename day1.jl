@@ -1,7 +1,8 @@
+callist = eval(Meta.parse("["*replace(replace(input,"\n\n"=>"],["), "\n"=>",")*"]"))
+
 ########################
 # Part 1
 ########################
-callist = eval(Meta.parse("["*replace(replace(input,"\n\n"=>"],["), "\n"=>",")*"]"))
 maximum(sum, callist)
 
 ########################
