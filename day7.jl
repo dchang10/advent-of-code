@@ -23,7 +23,7 @@ end
 
 Base.show(io::IO, node::ANode) = print(io, "$(typeof(node) <: ADir ? [i.name for i in node.children] : typeof(node))")
 
-file = open((@__DIR__)*"/input.txt")
+file = open((@__DIR__)*"/inputtest.txt")
 inputlist = [line for line in eachline(file)]
 close(file)
 
@@ -84,9 +84,7 @@ function getsizeofchildren(currdir)
   return tot
 end
 
-
 function addtosum(topdir)
-  
   dirlist = filter(x-> typeof(x) == Dir, topdir.children)
   temp = getsizeofchildren(topdir)
   tot = 0
@@ -94,9 +92,34 @@ function addtosum(topdir)
   for i in dirlist
     tot += addtosum(i)
   end
+  
   return tot
 end
 
 addtosum(currdir)
 
+########################
+# Part 2
+########################
+
+totlist = []
+function addtosum(topdir)
+  global totlist
+  dirlist = filter(x-> typeof(x) == Dir, topdir.children)
+  temp = getsizeofchildren(topdir)
+  tot = 0
+  tot += temp 
+  for i in dirlist
+    tot += addtosum(i)
+  end
+  
+  append!(totlist, temp)
+  return tot
+end
+
+spacetofree = 30000000 + totlist[end] - 70000000
+
+addtosum(currdir)
+sort!(totlist)
+totlist[findfirst(>=(spacetofree), totlist)]
 
